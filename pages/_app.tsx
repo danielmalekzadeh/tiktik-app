@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  console.log(Component);
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
