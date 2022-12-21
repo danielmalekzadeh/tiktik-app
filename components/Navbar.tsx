@@ -47,7 +47,7 @@ const Navbar = () => {
                     width={48}
                     height={48}
                     className="rounded-full"
-                    src={userProfile.image}
+                    src={userProfile?.image}
                     alt="profile"
                   />
                 </>

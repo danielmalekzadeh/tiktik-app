@@ -11,8 +11,16 @@ import { client } from "../utils/client";
 
 import { SanityAssetDocument } from "@sanity/client";
 import { topics } from "../utils/constants";
+import { BASE_URL } from "../utils";
 
 const Upload = () => {
+  const router = useRouter();
+  const { userProfile }: { userProfile: any } = useAuthStore();
+
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
   const [videoAsset, setVideoAsset] = useState<
     SanityAssetDocument | undefined
@@ -21,9 +29,6 @@ const Upload = () => {
   const [caption, setCaption] = useState("");
   const [category, setCategory] = useState(topics[0].name);
   const [savingPost, setSavingPost] = useState(false);
-
-  const { userProfile }: { userProfile: any } = useAuthStore();
-  const router = useRouter();
 
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
@@ -67,7 +72,7 @@ const Upload = () => {
         topic: category,
       };
 
-      await axios.post("http://localhost:3000/api/post", document);
+      await axios.post(`${BASE_URL}/api/post`, document);
       router.push("/");
     }
   };
